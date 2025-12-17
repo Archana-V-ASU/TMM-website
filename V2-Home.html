@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Tata Mumbai Marathon Homepage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Load Tailwind CSS for utility classes and responsiveness -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Load Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+    }
+
+    /* MAIN NAVBAR */
+    .main-navbar {
+      /* background: #e7e7e7; */
+      height: 56px;
+    }
+
+    /* .logo {
+
+              height: 30px;
+            } */
+
+    .nav-link {
+      color: #000000;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 0 14px;
+      line-height: 56px;
+    }
+
+    .nav-link:hover {
+      text-decoration: none;
+      color: #3195ff;
+    }
+
+     .signin {
+        background: #006cb4;
+        color: #fff;
+        padding: 30px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+    /* SUB BAR */
+    .sub-bar {
+      /* background: #d4d4d4; */
+      height: 34px;
+      font-size: 12.5px;
+    }
+
+    .sponsor-btn {
+      background: #6f6f6f;
+      color: #fff;
+      padding: 17px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      margin-left: 50%;
+    }
+
+    .blur-nav {
+      /* Set an opacity on the element's background (using Tailwind bg-white/30 on the div) */
+      /* This property applies the blur effect to the background visible through the element */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .video-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f7fafc;
+      /* Light gray background */
+    }
+
+    /* CARD STYLING */
+    .flip-card {
+      background-color: transparent;
+      width: 100%;
+      /* aspect ratio similar */
+      height: 250px;
+      perspective: 1000px;
+      /* for 3D effect */
+      overflow: hidden;
+      /* IMP to contain inner card */
+    }
+
+    /* 2. The container that rotates */
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+      /* Key for 3D perspective */
+      box-shadow: 0 4px 8px rgba(16, 36, 71, 0.173);
+      /* border-radius: 0.5rem; */
+    }
+
+    /* 3. Flip the card on hover */
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* 4. Position the front and back sides */
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      /* Hide the back side during the transition */
+      backface-visibility: hidden;
+      /* border-radius: 0.5rem; */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      /* Push content to the bottom */
+      padding: 1rem;
+    }
+
+    /* 5. Styling the Front side (Image, Gradient, Text) */
+    .flip-card-front {
+      background-size: cover;
+      background-position: center;
+      color: white;
+      /* Placeholder Background Image (Replace with your actual URL) */
+      /* background-image: url("https://placehold.co/600x400/1e88e5/ffffff?text=MARATHON"); */
+    }
+
+    /* Gradient Overlay for better text readability */
+    .flip-card-front::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      /* Linear gradient from transparent to dark */
+      background: linear-gradient(0deg,
+          rgba(11, 35, 68, 0.901) 20%,
+          rgba(0, 77, 144, 0) 70%);
+      z-index: 1;
+      /* border-radius: 0.5rem; */
+    }
+
+    /* Ensure text is above the gradient */
+    .flip-card-front .content {
+      z-index: 2;
+      position: relative;
+      /* Brings content to the front of the gradient */
+      text-align: left;
+    }
+
+    /* 6. Styling the Back side (More Info) */
+    .flip-card-back {
+      background-color: #0d9dfd;
+      /* Use a Bootstrap primary color */
+      color: white;
+      transform: rotateY(180deg);
+      /* Start rotated */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .flip-card-back .info {
+      max-width: 90%;
+    }
+
+    /* Style the Title and Distance */
+    .card-title-text {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .card-distance-text {
+      font-size: 0.8rem;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    /* BENTO GRID STYLING */
+    /* Ensures the background image covers the whole card */
+    .bento-card-bg {
+      background-size: cover;
+      background-position: center;
+      /* Sets a default height for small cards */
+      min-height: 200px;
+      /* Rounded corners for the cards */
+      border-radius: 0px;
+      overflow: hidden;
+      /* Important for containing the image/gradient */
+    }
+
+    /* Calculated height to perfectly match the two stacked small cards (200px + 200px + 24px gap) */
+    .card-tall {
+      min-height: 424px;
+    }
+
+    /* Small cards (2 per column stack) */
+    .card-small {
+      min-height: 200px;
+    }
+
+    /* Styling for the text container, positioned absolutely over the image */
+    .card-content-overlay {
+      /* Position text at the bottom left */
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      z-index: 2;
+      /* Ensures text is above the gradient */
+      color: white;
+    }
+
+    /* Gradient overlay to separate text from the background image */
+    .gradient-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      /* The gradient: from transparent at the top to dark/black at the bottom */
+      background: linear-gradient(to top,
+          rgba(0, 0, 0, 0.8) 0%,
+          rgba(0, 0, 0, 0) 60%);
+      z-index: 1;
+      /* Ensures gradient is between image (0) and text (2) */
+    }
+
+    /* Custom text style for titles */
+    .card-title-main {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0;
+      line-height: 1.2;
+    }
+
+    /* Custom text style for subtitles */
+    .card-subtitle-text {
+      font-size: 0.9rem;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    /* Custom margin for the statistics section */
+    .stats-section-margin {
+      margin-top: 5rem;
+      margin-bottom: 3rem;
+    }
+  </style>
+</head>
+
+<body class="position: relative;">
+  <!-- NAVBAR -->
+  <div class="container-fluid p-0 position-fixed blur-nav fixed top-0 w-full p-0 z-50" id="CHECK"
+    style="fill-opacity: 0">
+    <div class="d-flex align-items-center justify-content-between main-navbar me-0 bg-white/50 shadow-lg">
+      <!-- Left Logo -->
+      <div><img src="TMM-logo.jpg" alt="" style="height: 56px;"></div>
+
+      <!-- Center Nav -->
+      <nav class="d-flex align-items-center">
+        <a class="nav-link" href="V2-Home.html">Home</a>
+        <a class="nav-link" href="#scroll-abt-us">About Us</a>
+
+        <!-- DROPDOWN CONTAINER: with Tailwind 'group' and 'relative' for hover -->
+        <div class="relative group">
+          <a class="nav-link cursor-pointer hover:text-[#3195ff]" href="#">
+            Race Categories
+          </a>
+
+          <!-- Dropdown -->
+          <div
+            class="absolute hidden group-hover:block bg-light shadow-xl w-48 mt-0 border border-gray-100 z-50 overflow-hidden transition-all duration-300 ease-in-out">
+            <!-- Dropdown Topics -->
+            <!-- ADD SCROLLSPY to CATEGORIES -->
+            <a href="V2-Cat-Marathon.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Marathon
+              (42.2k)</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Half Marathon (21.1k)</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Open 10k</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dream Run</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Senior Citizens' Run</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Champions with Disabilities</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Virtual Run</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Elite Participation</a>
+          </div>
+        </div>
+        <!-- END of CATEGORIES dropdown -->
+
+        <!-- PHILANTHROPY DROPDOWN-->
+        <div class="relative group">
+          <a class="nav-link cursor-pointer hover:text-[#3195ff]" href="#">
+            Philanthropy
+          </a>
+
+          <!-- Dropdown -->
+          <div
+            class="absolute hidden group-hover:block bg-light shadow-xl w-48 mt-0 border border-gray-100 z-50 overflow-hidden transition-all duration-300 ease-in-out">
+            <!-- Dropdown Topics -->
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Introduction</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">The Charity Programme</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Charity Running Places</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Charity Structure</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Philanthropy Over the Years</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Participating NGOs</a>
+          </div>
+        </div>
+        <!-- END of PHILANTHROPY dropwdown -->
+
+        <!-- NEWS DROPDOWN-->
+        <div class="relative group">
+          <a class="nav-link cursor-pointer hover:text-[#3195ff]" href="#">
+            News & Media
+          </a>
+
+          <!-- Dropdown -->
+          <div
+            class="absolute hidden group-hover:block bg-light shadow-xl w-48 mt-0 border border-gray-100 z-50 overflow-hidden transition-all duration-300 ease-in-out">
+            <!-- Dropdown Topics -->
+            <a href="Gallery.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gallery</a>
+            <a href="News.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Latest News</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Contact Us- Media</a>
+          </div>
+        </div>
+        <!-- END of NEWS dropwdown -->
+
+        <!-- RESULTS DROPDOWN-->
+        <div class="relative group">
+          <a class="nav-link cursor-pointer hover:text-[#3195ff]" href="#">
+            Initiatives
+          </a>
+
+          <!-- Dropdown -->
+          <div
+            class="absolute hidden group-hover:block bg-light shadow-xl w-48 mt-0 border border-gray-100 z-50 overflow-hidden transition-all duration-300 ease-in-out">
+            <!-- Dropdown Topics -->
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">TMM Legends Club</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Har Dil Mumbai</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">TMM Agro-Forest Initiative</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Green Initiatives</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Socio-Economic Health &
+              Impact</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Inspiration Medal</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Home Run Squad</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Share Your Story</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Marathon Debutant</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sisterhood of Running</a>
+          </div>
+        </div>
+        <!-- END of RESULTS dropwdown -->
+
+        <!-- INITIATIVES DROPDOWN-->
+        <div class="relative group">
+          <a class="nav-link cursor-pointer hover:text-[#3195ff]" href="#">
+            Results
+          </a>
+
+          <!-- Dropdown -->
+          <div
+            class="absolute hidden group-hover:block bg-light shadow-xl w-48 mt-0 border border-gray-100 z-50 overflow-hidden transition-all duration-300 ease-in-out">
+            <!-- Dropdown Topics -->
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Race Results</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Category Winners</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Leaderboard</a>
+          </div>
+        </div>
+        <!-- END of RESULTS dropwdown -->
+
+        <!-- <a class="nav-link" href="#">News & Media</a>
+          <a class="nav-link" href="#">Initiatives</a>
+          <a class="nav-link" href="#">Results</a> -->
+      </nav>
+
+      <!-- XXXXXXXXXX    BUTTTON -->
+      <!-- Sign In -->
+      <!-- <div class="signin">Sign in</div> -->
+           <div id="signInButton" 
+             class="
+                 signin 
+                 text-center 
+                 py-3 
+                 shadow-lg 
+                 font-semibold 
+                 text-white 
+                 cursor-pointer 
+                 
+                 /* Hover effect: change background color and shadow on mouse hover */
+                 hover:bg-indigo-700 
+                 hover:shadow-xl 
+                 
+                 /* Active state for click feedback */
+                 active:bg-indigo-800
+                 
+                 /* Smooth transition for visual feedback */
+                 transition 
+                 duration-200 
+                 ease-in-out
+             "
+             tabindex="0"
+        >
+            <a href="V2-Sign-in.html">Sign in</a> 
+        </div>
+    </div>
+
+    <!-- SUB BAR -->
+    <div class="d-flex align-items-center justify-content-between sub-bar me-0 bg-white/30 shadow-xl">
+      <div class="ms-3" id="countdown">--d: --h: --m: --s</div>
+      <div> <img src="idfc logo.png" alt="" style="height: 38px; padding: 0px; margin: 0px;"></div>
+    </div>
+  </div>
+
+  <!-- WEBSITE CONTENT SECTION -->
+  <div>
+    <div class="container-fluid p-0 m-0">
+      <iframe width="100%" height="700rem" src="https://www.youtube.com/embed/vPfnbTpRvis?si=59r-37Zdlc6T5f25"
+    title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen
+    class="p-0 m-0">
+  </iframe>
+
+      <!-- <div class="ratio ratio-16x9">
+        <video controls poster="poster.avif">
+          <source src="Header-Video-w-sound.mp4" type="video/mp4" />
+          <source src="your-video.webm" type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
+      </div> -->
+    </div>
+  </div>
+  <!-- IN Heading of ABOUT US SECTION, ADD id="#scroll-name-->
+
+  <!-- RACE CATEGORIES -->
+
+  <!-- CARD CONTAINER -->
+  <div class="container pb-0 mt-5">
+    <h2 class="text-center mb-3"><b>Race Categories</b></h2>
+    <p class="mb-5 text-center" style="line-height: 120%">
+      Discover the perfect challenge for your fitness level, from the full
+      marathon <br />
+      to our beginner-friendly 10K.
+    </p>
+    <!-- Grid Layout row 1 -->
+    <div class="row g-4">
+      <!-- Card 1: Marathon -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <!-- FRONT SIDE (Image, Title, Distance, Gradient) -->
+            <div class="flip-card-front" style="
+                  background-image: url(https://images.forbesindia.com/blog/wp-content/uploads//media/images/2024/Jan/img_227431_mumbaimarathon.jpg);
+                ">
+              <div class="content">
+                <p class="card-distance-text mb-0">42.1 Km</p>
+                <h3 class="card-title-text">Marathon</h3>
+              </div>
+            </div>
+
+            <!-- BACK SIDE (More Info) -->
+             <!-- FIXME: Clickable button that leads to Marathon pg -->
+            <div class="flip-card-back">
+              <div class="info p-3">
+                <p> <b>Full Marathon</b></p>
+                <p class="" style="line-height: 120%">
+                  The ultimate endurance challenge. Test your limits on this
+                  world-class course.
+                </p>
+                <button class="btn btn-light btn-sm mt-3" style="border-radius: 0">
+                  <a href="V2-Cat-Marathon.html">View details</a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Half Marathon -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="
+                  background-image: url('https://shyamgopan.com/wp-content/uploads/2018/01/tmm-2018-3.jpg');
+                ">
+              <div class="content">
+                <p class="card-distance-text mb-0">21 Km</p>
+                <h5 class="card-title-text">Half Marathon</h4>
+              </div>
+            </div>
+
+            <div class="flip-card-back">
+              <div class="info p-3">
+                <p> <b>Half Marathon</b></p>
+                <p class="" style="line-height: 120%">
+                  A challenge for seasoned runners. Scenic view with great support.
+                </p>
+                <button class="btn btn-light btn-sm mt-3" style="border-radius: 0">
+                  View details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Open 10K -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="
+                  background-image: url('https://img.etimg.com/thumb/width-1600,height-900,imgsize-2477633,resizemode-75,msid-107021557/news/india/tata-mumbai-marathon-59000-mumbaikars-running-across-town.jpg');
+                ">
+              <div class="content">
+                <p class="card-distance-text mb-0">10 Km</p>
+                <h3 class="card-title-text">Open 10K</h3>
+              </div>
+            </div>
+
+            <div class="flip-card-back">
+              <div class="info p-3">
+                <p> <b>Open 10K</b></p>
+                <p class="" style="line-height: 120%">
+                  Perfect for intermediate runners looking for speed and
+                  distance.
+                </p>
+                <button class="btn btn-light btn-sm mt-3" style="border-radius: 0">
+                  View details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Dream Run -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="
+                  background-image: url('https://www.shutterstock.com/editorial/image-editorial/M0T6M34aM0z6cb12MDkzMjA=/people-take-part-half-marathon-during-tata-550nw-13716119r.jpg');
+                ">
+              <div class="content">
+                <p class="card-distance-text mb-0">Dream Run</p>
+                <h3 class="card-title-text">5.9 Km</h3>
+              </div>
+            </div>
+
+            <div class="flip-card-back">
+              <div class="info p-3">
+                <p> <b>Dream Run</b></p>
+                <p class="" style="line-height: 120%">
+                  A fun, non-competitive run for families and first-timers.
+                  Run for a cause!
+                </p>
+                <button class="btn btn-light btn-sm mt-3" style="border-radius: 0">
+                  View details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- CARD CONTAINER 1 ENDS -->
+
+
+
+  <!-- CARD CONTAINER 2 - aka row 2 -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <!-- Card 1: Marathon -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <!-- FRONT SIDE (Image, Title, Distance, Gradient) -->
+            <div class="flip-card-front" style="
+                      background-image: url(https://adhatatrust.org/wp-content/uploads/2025/01/TMM-2025-img_9.jpg);
+                    ">
+              <div class="content">
+                <p class="card-distance-text mb-0">4.2 Km</p>
+                <h3 class="card-title-text">Senior Citizens' Run</h3>
+              </div>
+            </div>
+
+            <!-- BACK SIDE (More Info) -->
+            <div class="flip-card-back">
+              <div class="info p-3">
+                <p> <b>Senior Citizens' Run</b></p>
+                <p class="" style="line-height: 120%">
+                  A non-timed, participative sprint for folks aged 60 and older.
+                </p>
+                <button class="btn btn-light btn-sm mt-3" style="border-radius: 0">
+                  View details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Half Marathon -->
+      <div class="col-12 col-sm-6 col-lg-3 pt-0">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="
+                      background-image: url('https://www.shutterstock.com/editorial/image-editorial/M1T0U1y7N7T8UbzbOTQ0MTU=/participants-on-wheelchair-seen-champions-disability-category-440nw-15108561i.jpg');
+                    ">
+              <div class="content">
+                <p class="card-distance-text mb-0">1.3 Km</p>
+                <h5 class="card-title-text">Champions with Disabilities</h4>
+              </div>
+            </div>
+
+            <div class="flip-card-back">
+              <div class="info p-3">
+                <p> <b>Champions with Disabilities</b></p>
+                <p class="" style="line-height: 120%">
+                  An inclusive run open to persons with disabilities and their caretakers.
+                </p>
+                <button class="btn btn-light btn-sm mt-3" style="border-radius: 0">
+                  View details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Open 10K -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="
+                      background-image: url('https://greatruns.com/wp-content/uploads/2017/04/Mumbai-Runners.jpeg');
+                    ">
+              <div class="content">
+                <p class="card-distance-text mb-0">Multiple Distance Options</p>
+                <h3 class="card-title-text">Virtual Run</h3>
+              </div>
+            </div>
+
+            <div class="flip-card-back">
+              <div class="info p-3">
+                <p> <b>Virtual Run</b></p>
+                <p class="" style="line-height: 120%">
+                  Participate in the Tata Mumbai Marathon (Virtual event) from the comfort of your location using the
+                  TMM 2026 App.
+                </p>
+                <button class="btn btn-light btn-sm mt-3" style="border-radius: 0">
+
+                  <a href="https://www.google.com">View details</a>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Dream Run -->
+
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front" style="
+                      background-image: url('https://images.news9live.com/wp-content/uploads/2024/01/TATA.jpg?w=1200&enlarge=true');
+                    ">
+              <div class="content">
+                <p class="card-distance-text mb-0">Elite Participation</p>
+                <h3 class="card-title-text">Qualified Speed Runners</h3>
+              </div>
+            </div>
+
+            <div class="flip-card-back">
+              <div class="info p-3">
+                <p> <b>Elite Participation</b></p>
+                <p class="" style="line-height: 120%">
+                  The highest level of difficulty at TMM, a worthy challenge for world-class athletes to compete.
+                </p>
+                <button class="btn btn-light btn-sm mt-3" style="border-radius: 0">
+                  View details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ABOUT US -->
+  <div data-bs-spy="#scroll-abt-us" data-bs-target="#CHECK" data-bs-offset="0" class="scrollspy-example text-center"
+    tabindex="0">
+    <h4 id="scroll-abt-us" class="pb-3 ps-5" style="padding-top: 100px;">
+      <b>About Us</b>
+    </h4>
+    <p class="ms-5">
+      We've been championing endurance, inclusivity, and the unstoppable spirit of the marathon <br>for over two
+      decades.
+      Learn more about us here!
+    </p>
+  </div>
+
+  <!-- Bento-Grid Layout (3 Columns, perfectly balanced height) -->
+  <div class="container py-5">
+    <div class="row g-4">
+      <!-- COLUMN 1: Event History (Tall Card spanning 2 rows) -->
+      <div class="col-12 col-lg-4">
+        <div class="position-relative bento-card-bg card-tall" style="
+              background-image: url('https://d12d6l12s3d372.cloudfront.net/tata_mumbai_marathon_24_b59fac3aca.jpg');
+            ">
+          <div class="gradient-overlay"></div>
+          <div class="card-content-overlay">
+            <p class="card-subtitle-text">Since its inception in 2004, TMM has grown into Asia's largest and most prestigious road race and one of the top ten marathons in the world, renowned for launching India's running movement and raising hundreds of crores for charity. </p>
+            <h3 class="card-title-main">Event History</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMN 2: Stacked (Title Sponsor and Associate Sponsor) -->
+      <div class="col-12 col-lg-4">
+        <!-- Title Sponsor (Top-Middle Card) -->
+        <div class="position-relative bento-card-bg card-small mb-4" style="
+              background-image: url('https://mir-s3-cdn-cf.behance.net/projects/404/1adc04228728811.Y3JvcCwxMzgwLDEwODAsMTQzLDA.jpg');
+            ">
+          <div class="gradient-overlay"></div>
+          <div class="card-content-overlay">
+            <p class="card-subtitle-text">Bisleri</p>
+            <h3 class="card-title-main">Title Sponsor</h3>
+          </div>
+        </div>
+        <!-- Associate Sponsor (Bottom-Middle Card) -->
+        <div class="position-relative bento-card-bg card-small" style="
+              background-image: url('https://cdn.zeebiz.com/sites/default/files/2020/09/23/129481-idfc.jpg');
+            ">
+          <div class="gradient-overlay"></div>
+          <div class="card-content-overlay">
+            <p class="card-subtitle-text">IDFC First Bank</p>
+            <h3 class="card-title-main">Associate Sponsor</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMN 3: Stacked (Event Ambassador and Event Dockets) -->
+      <div class="col-12 col-lg-4">
+        <!-- Event Ambassador (Top-Right Card) -->
+        <div class="position-relative bento-card-bg card-small mb-4" style="
+              background-image: url('https://i.guim.co.uk/img/static/sys-images/Guardian/About/General/2012/8/11/1344717490892/Mo-Farah-008.jpg?width=465&dpr=1&s=none&crop=none');
+            ">
+          <div class="gradient-overlay"></div>
+          <div class="card-content-overlay">
+            <p class="card-subtitle-text">Sir Mo Farah</p>
+            <h3 class="card-title-main">Event Ambassador</h3>
+          </div>
+        </div>
+        <!-- Event Dockets (Bottom-Right Card) -->
+        <div class="position-relative bento-card-bg card-small" style="
+              background-image: url('https://d3fzplfbemxxxv.cloudfront.net/wp-content/uploads/2024/03/tata-marathon-2024-report-big.jpg?x77211');
+            ">
+          <div class="gradient-overlay"></div>
+          <div class="card-content-overlay">
+            <p class="card-subtitle-text">Race Information</p>
+            <h3 class="card-title-main">Event Dockets</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="text-center stats-section-margin">
+      <h3 class="mb-5" style="font-weight: 500">
+        More statistics that speak for TMM's success
+      </h3>
+      <div class="row justify-content-center">
+        <!-- TODO: ANIMATE NUMBERS in SLOT MACHINE STYLE-->
+        <!-- Statistic 1 -->
+        <div class="col-6 col-md-3 mb-4">
+          <h2 class="display-4 counter-count" style="font-weight: 700">200+</h2>
+          <p style="color: #6c757d; font-size: 1.1rem">NGOs Participating</p>
+        </div>
+
+        <!-- Statistic 2 -->
+        <div class="col-6 col-md-3 mb-4">
+          <h2 class="display-4" style="font-weight: 700">1,200+</h2>
+          <p style="color: #6c757d; font-size: 1.1rem">
+            Individuals signing up to raise funds
+          </p>
+        </div>
+
+        <!-- Statistic 3 -->
+        <div class="col-6 col-md-3 mb-4">
+          <h2 class="display-4" style="font-weight: 700">100+</h2>
+          <p style="color: #6c757d; font-size: 1.1rem">
+            Corporates Participating
+          </p>
+        </div>
+
+        <!-- Statistic 4 -->
+        <div class="col-6 col-md-3 mb-4">
+          <h2 class="display-4" style="font-weight: 700">900+</h2>
+          <p style="color: #6c757d; font-size: 1.1rem">Active fundraisers</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <!-- content end XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+  <!--  FIXME: BG IMAGE-->
+  <!-- FOOTER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+  <footer class="bg-gray-900 text-white  shadow-2xl mt-8 z-2">
+
+    <!-- CONTENT LAYER -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+
+      <!-- BG PHOTO -->
+      <!-- <div
+                  class="absolute inset-0 z-0 after:content-[''] after:absolute after:inset-0 after:bg-gray-900 after:opacity-80">
+                  <img
+                    src="Checkers.png"
+                    alt="Decorative Footer Background"
+                    class="w-full h-full object-cover"
+                    onerror="this.style.backgroundColor='#1f2937'; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'"
+                  />
+                </div> -->
+
+
+      <!-- GRID CONTAINER INSIDE CONTENT INSIDE FOOTER (3 columns on large screens, stacked on mobile) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:text-left">
+      </div>
+      <!-- CORRECTED DIVS -->
+      <div class="row m-0" style="height: 50vh">
+        <!-- COL 1: Brand & Description -->
+        <div class="col ms-0 mt-2 mb-2">
+          <a href="#" class="text-2xl font-bold  transition duration-300">
+            Tata Mumbai Marathon
+          </a>
+          <p class="mt-4 text-gray-400 text-sm">
+            India's biggest sporting platform for social impact.
+            <br>
+            #HarDilMumbai
+          </p>
+          <p class="mt-4 text-gray-500 text-xs">
+            14, St. James' Court, Marine Drive, Mumbai
+          </p>
+        </div>
+
+
+        <!-- COL 2:   Quick Links -->
+        <div class="col m-2">
+          <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Policies</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Consent</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Waiver</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Virtual Waiver</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Medical Advisory</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Disclaimer</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Entry Rules and
+                Regulations</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Legal Disclaimer</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Open Source License</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Disclosure</a></li>
+          </ul>
+        </div>
+
+
+        <!-- COL 3 -->
+        <div class="col m-2">
+          <h3 class="text-lg font-semibold mb-4 ">Connect With Us</h3>
+          <div class="flex justify-center lg:justify-start space-x-6">
+
+            <!-- Facebook Icon -->
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook"
+              class="text-gray-400 hover:text-blue-600 transition duration-300 transform hover:scale-110">
+              <i class="fab fa-facebook-f text-2xl"></i>
+            </a>
+
+            <!-- Twitter Icon -->
+            <a href="https://x.com" target="_blank" aria-label="X (Twitter)"
+              class="text-gray-400 hover:text-white transition duration-300 transform hover:scale-110">
+              <i class="fab fa-x-twitter text-2xl"></i>
+            </a>
+
+            <!-- Instagram Icon -->
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram"
+              class="text-gray-400 hover:text-pink-500 transition duration-300 transform hover:scale-110">
+              <i class="fab fa-instagram text-2xl"></i>
+            </a>
+
+            <!-- LinkedIn Icon -->
+            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"
+              class="text-gray-400 hover:text-blue-400 transition duration-300 transform hover:scale-110">
+              <i class="fab fa-linkedin-in text-2xl"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- COL 4 -->
+        <div class="col-3 m-2"></div>
+      </div>
+
+
+      <!-- XXXX -->
+      <!-- Copyright & Separator -->
+      <div class="mt-10 border-t border-gray-700 text-center" style="margin-top: 2rem">
+        <p class="text-sm text-gray-500 mt-4">
+          &copy; <span id="current-year"></span> Tata Mumbai Marathon. All rights reserved.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    // Set current year dynamically for the copyright
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+    // SET RACE DATE (YYYY, MM-1, DD, HH, MM, SS)
+    const raceDate = new Date(2026, 0, 18, 5, 30, 0); // 18 Jan 2026, 5:30 AM India
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = raceDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "Race Day!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById(
+        "countdown"
+      ).innerHTML = `${days}d: ${hours}h: ${minutes}m: ${seconds}s`;
+    }
+
+    // Initial call
+    updateCountdown();
+
+    // Update every second
+    setInterval(updateCountdown, 1000);
+
+    // COUNTER ANIMATION
+    $('.counter-count').each(function () {
+        $(this).prop('Counter',0).animate({
+            Counter: $(this).text()
+        }, {
+            duration: 5000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+    });
+  </script>
+</body>
+
+</html>

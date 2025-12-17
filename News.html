@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tata Mumbai Marathon – News</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Inter Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      html,
+      body {
+        overflow-x: hidden;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-image: url("bgimage1.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #242424;
+      }
+
+      /* ================= NAVBAR ================= */
+
+      /* MAIN NAVBAR */
+      /* NAVBAR */
+      .blur-nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        backdrop-filter: blur(14px) saturate(160%);
+        -webkit-backdrop-filter: blur(14px) saturate(160%);
+      }
+
+      .main-navbar {
+        height: 56px;
+      }
+
+      .sub-bar {
+        height: 34px;
+        font-size: 12.5px;
+      }
+
+      .nav-link {
+        color: #000;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 0 14px;
+        line-height: 56px;
+        cursor: pointer;
+      }
+
+      .nav-link:hover {
+        color: #3195ff;
+      }
+
+      .signin {
+        height: 56px;
+        min-width: 120px;
+        background: #006cb4;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+      }
+
+      /* DROPDOWN */
+      .nav-group {
+        position: relative;
+      }
+
+      .nav-dropdown {
+        position: absolute;
+        top: 56px;
+        left: 0;
+        min-width: 240px;
+        background: #fff;
+        border: 1px solid #eee;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(8px);
+        transition: all 0.2s ease;
+        z-index: 2000;
+      }
+
+      .nav-group:hover .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .nav-dropdown a {
+        display: block;
+        padding: 10px 14px;
+        font-size: 14px;
+        color: #333;
+        white-space: nowrap;
+      }
+
+      .nav-dropdown a:hover {
+        background: #f3f4f6;
+        color: #3195ff;
+      }
+
+      /* ================= CAROUSEL ================= */
+      .ad-img {
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .carousel-item::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.25);
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+
+      /* ================= NEWS ================= */
+      .tata-news {
+        background: #e6e6e600;
+        color: #000;
+        padding: 0 0 120px;
+      }
+
+      .news-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      /* MASTHEAD REFINED */
+      .news-masthead {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 64px;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+
+      .news-masthead-left h1 {
+        font-size: 104px;
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin: 0 0 16px;
+        text-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* subtle shadow like image 2 */
+      }
+
+      .news-handles {
+        font-size: 13px;
+        color: #111;
+        opacity: 0.85;
+      }
+
+      /* Right block */
+      .news-masthead-right {
+        text-align: right;
+      }
+
+      .news-masthead-box {
+        width: 100vw;
+        height: 300px;
+        margin-left: calc(50% - 50vw);
+        background: linear-gradient(
+          to left,
+          #2b8bd1 0%,
+          #b7dfb1 55%,
+          #e18f37 100%
+        );
+        padding: 48px 0;
+        margin-bottom: 64px;
+      }
+
+      .news-masthead-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 48px 40px;
+      }
+
+      .news-location {
+        font-size: 14px;
+        line-height: 1.4;
+      }
+
+      @media (max-width: 768px) {
+        .news-masthead {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 32px;
+        }
+
+        .news-masthead-left h1 {
+          font-size: 56px;
+        }
+
+        .news-masthead-right {
+          text-align: left;
+        }
+      }
+
+      .news-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        margin-bottom: 48px;
+      }
+
+      .news-meta .date {
+        text-align: right;
+        font-weight: 500;
+      }
+
+      .news-headline {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 40px;
+      }
+
+      .news-body {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 48px;
+      }
+
+      .news-image {
+        width: 100%;
+        height: 320px;
+        background: #d0d0d000;
+      }
+
+      .news-text p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+
+      .author {
+        margin-top: 24px;
+        font-weight: 600;
+      }
+
+      @media (max-width: 768px) {
+        .news-masthead h1 {
+          font-size: 56px;
+        }
+
+        .news-body {
+          grid-template-columns: 1fr;
+        }
+
+        .news-meta {
+          flex-direction: column;
+          gap: 16px;
+        }
+      }
+
+      .main-container {
+        padding: 80px 40px 40px;
+        border-top: 2px solid #1a1a1a;
+        border-bottom: 2px solid #1a1a1a;
+        margin-top: 0px;
+        position: relative;
+        background-color: #cccccc00;
+        margin-left: 0%;
+        margin-right: 0%;
+      }
+
+      /* Large "2025" Background Text */
+      .year-bg {
+        font-size: 22rem;
+        font-weight: 900;
+        line-height: 0.8;
+        color: hsl(211, 100%, 61%);
+        text-align: right;
+        letter-spacing: -10px;
+      }
+
+      h1.display-title {
+        font-size: 5rem;
+        font-weight: 900;
+        line-height: 1;
+        margin-bottom: 30px;
+        color: #1a1a1a;
+      }
+
+      .stats-list {
+        list-style-type: disc;
+        padding-left: 20px;
+        font-size: 1.1rem;
+        line-height: 1.4;
+        color: #4b4b4b;
+      }
+
+      .ngo-section {
+        margin-top: 25px;
+      }
+
+      .ngo-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #000;
+      }
+
+      /* Responsiveness for mobile */
+      @media (max-width: 992px) {
+        .year-bg {
+          font-size: 10rem;
+          text-align: center;
+          margin-top: 30px;
+        }
+        h1.display-title {
+          font-size: 3.5rem;
+        }
+      }
+      /* Styling for the new section */
+      .article-section {
+        padding: 60px 0;
+        border-bottom: 2px solid #cccccc00;
+      }
+
+      .article-header {
+        font-weight: 800;
+        font-size: 2.2rem;
+        line-height: 1.1;
+        margin-bottom: 50px;
+        text-transform: capitalize;
+        color: #000;
+      }
+
+      .content-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .news-image-img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+      }
+      /* Placeholder for the grey image boxes */
+      .image-placeholder {
+        background-color: #d9d9d9;
+        width: 100%;
+        height: 350px; /* Adjust height as needed */
+      }
+
+      .mb-custom {
+        margin-bottom: 40px;
+      }
+      /* News Bar Container */
+      .news-scroll-container {
+        border-top: 1px dotted #000000;
+        border-bottom: 1px solid #000000;
+        padding: 15px 0;
+        background-color: #d8d8d800;
+      }
+
+      .article-image {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+      }
+
+      .year-bg-img {
+        width: 100%;
+        max-width: 520px;
+        display: block;
+        margin-left: auto;
+      }
+
+      /* Scrollable Wrapper */
+      .news-wrapper {
+        display: flex;
+        overflow-x: auto; /* Enables horizontal scrolling */
+        white-space: nowrap;
+        gap: 30px;
+        padding-bottom: 10px;
+        scrollbar-width: thin; /* Thin scrollbar for Firefox */
+      }
+
+      /* Custom Scrollbar for Chrome/Safari */
+      .news-wrapper::-webkit-scrollbar {
+        height: 6px;
+      }
+      .news-wrapper::-webkit-scrollbar-thumb {
+        background: #cccccc00;
+        border-radius: 10px;
+      }
+
+      /* Individual News Item */
+      .news-item {
+        flex: 0 0 auto; /* Prevents items from shrinking */
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #333;
+        transition: opacity 0.2s;
+        max-width: 400px;
+      }
+
+      .news-item:hover {
+        opacity: 0.7;
+        color: #000;
+      }
+
+      .news-thumb {
+        width: 100px;
+        height: 60px;
+        background-color: #e0e0e0;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+
+      .news-text {
+        font-size: 0.9rem;
+        font-weight: bold;
+        white-space: normal; /* Allows text to wrap within the item */
+        line-height: 1.2;
+      }
+
+      footer a {
+        color: #9ca3af !important; /* Tailwind gray-400 */
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        color: #ffffff !important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <div class="blur-nav bg-white/70">
+      <!-- MAIN NAV -->
+      <div
+        class="d-flex align-items-center justify-content-between bg-white/60 shadow main-navbar bg-white/50"
+      >
+        <!-- LOGO -->
+        <img src="TMM-logo.jpg" alt="TMM" style="height: 56px" />
+
+        <!-- NAV LINKS -->
+        <nav class="d-none d-lg-flex align-items-center">
+          <a class="nav-link" href="V2-Home.html">Home</a>
+          <a class="nav-link" href="V2-Home.html">About Us</a>
+
+          <!-- RACE CATEGORIES -->
+          <div class="nav-group">
+            <span class="nav-link">Race Categories</span>
+            <div class="nav-dropdown">
+              <a href="V2-Cat-Marathon.html">Marathon (42.2k)</a>
+              <a href="#">Half Marathon (21.1k)</a>
+              <a href="#">Open 10K</a>
+              <a href="#">Dream Run</a>
+              <a href="#">Senior Citizens’ Run</a>
+              <a href="#">Champions with Disabilities</a>
+              <a href="#">Virtual Run</a>
+            </div>
+          </div>
+
+          <!-- PHILANTHROPY -->
+          <div class="nav-group">
+            <span class="nav-link">Philanthropy</span>
+            <div class="nav-dropdown">
+              <a href="#">Introduction</a>
+              <a href="#">Charity Programme</a>
+              <a href="#">Charity Running Places</a>
+              <a href="#">Participating NGOs</a>
+            </div>
+          </div>
+
+          <!-- NEWS -->
+          <div class="nav-group">
+            <span class="nav-link">News & Media</span>
+            <div class="nav-dropdown">
+              <a href="Gallery.html">Gallery</a>
+              <a href="News.html">Latest News</a>
+              <a href="#">Media Contact</a>
+            </div>
+          </div>
+
+          <!-- INITIATIVES -->
+          <div class="nav-group">
+            <span class="nav-link">Initiatives</span>
+            <div class="nav-dropdown">
+              <a href="#">TMM Legends Club</a>
+              <a href="#">Har Dil Mumbai</a>
+              <a href="#">Green Initiatives</a>
+              <a href="#">Inspiration Medal</a>
+            </div>
+          </div>
+
+          <!-- RESULTS -->
+          <div class="nav-group">
+            <span class="nav-link">Results</span>
+            <div class="nav-dropdown">
+              <a href="#">Race Results</a>
+              <a href="#">Category Winners</a>
+              <a href="#">Leaderboard</a>
+            </div>
+          </div>
+        </nav>
+
+        <!-- SIGN IN -->
+        <a href="V2-Sign-in.html" class="signin">Sign in</a>
+      </div>
+
+      <!-- SUB BAR -->
+      <div
+        class="d-flex align-items-center justify-content-between bg-white/70 shadow-sm sub-bar"
+      >
+        <div id="countdown" class="ps-3">--d : --h : --m : --s</div>
+        <!-- Sponsor Logo Placeholder -->
+        <img
+          src="idfc logo.png"
+          alt="Sponsor"
+          style="height: 34px; padding: 0"
+        />
+      </div>
+    </div>
+
+    <!-- Spacer -->
+    <div style="height: 82px"></div>
+
+    <!-- CAROUSEL -->
+    <div class="container-fluid p-0 mb-0">
+      <div
+        class="carousel slide carousel-fade"
+        data-bs-ride="carousel"
+        data-bs-interval="2000"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="ad-1.jpg.png" class="d-block w-100 ad-img" />
+          </div>
+          <div class="carousel-item">
+            <img src="ad-2.jpg.png" class="d-block w-100 ad-img" />
+          </div>
+          <div class="carousel-item">
+            <img src="ad-3.jpg.png" class="d-block w-100 ad-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWS SECTION -->
+    <section class="tata-news">
+      <div class="news-container">
+        <div class="news-masthead-box">
+          <div class="news-masthead-inner">
+            <div class="news-masthead">
+              <div class="news-masthead-left">
+                <h1>THE TATA NEWS</h1>
+
+                <div class="news-handles">
+                  @thetatanews &nbsp;&nbsp; @thetatablogs &nbsp;&nbsp;
+                  #whatsnewintata &nbsp;&nbsp; @whatsnewintata &nbsp;&nbsp;
+                  @newintata
+                </div>
+              </div>
+
+              <div class="news-masthead-right">
+                <img src="Black tmm.png" alt="Tata Mumbai Marathon" />
+                <div class="news-location">
+                  <strong>MUMBAI</strong><br />
+                  November 28 2025
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="news-headline">
+          TMM 2025 Reaffirms the Power of Sport in<br />
+          Driving Social Change
+        </h2>
+
+        <div class="news-body">
+          <img
+            src="news1.jpg"
+            alt="Tata Mumbai Marathon News"
+            class="news-image-img"
+          />
+
+          <div class="news-text">
+            <p>
+              Mumbai, 17th April 2025: As the Tata Mumbai Marathon (TMM) draws
+              the curtain on its landmark 20th edition, it continues to stand as
+              a shining example of how sport can drive social change.
+            </p>
+
+            <p>
+              What began as a vision to inspire and unite communities has now
+              evolved into India’s most impactful sporting movement.
+            </p>
+
+            <p>
+              With support from 275 NGOs, TMM 2025 raised INR 63.62 crores for
+              social causes — reinforcing the spirit of #ChangeBeginsHere.
+            </p>
+
+            <p class="author">— Asarah Shaikh</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="main-container">
+        <div class="row align-items-start">
+          <div class="col-lg-6 col-md-12">
+            <h1 class="display-title">2025 IN<br />NUMBERS</h1>
+
+            <ul class="stats-list">
+              <li>NGOs participating – 275</li>
+              <li>Corporates participating – 165</li>
+              <li>Corporate teams – 246</li>
+              <li>Individuals signing up to raise funds – 1446</li>
+              <li>Active fundraisers – 963</li>
+              <li>
+                Change Runners (fundraisers who raise over INR 1.75Lakh) – 203
+              </li>
+            </ul>
+
+            <div class="ngo-section">
+              <p class="ngo-title">Highest fundraising NGOs:</p>
+              <ul class="stats-list">
+                <li>Shrimad Rajchandra Love and Care - INR 13,67,39,437</li>
+                <li>Light of Life Trust - INR 5,12,74,405</li>
+                <li>United Way Mumbai - INR 4,74,09,382</li>
+                <li>ADHAR - INR 2,36,83,068</li>
+                <li>Isha Education - INR 1,88,55,820</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-12">
+            <img src="news2.png" alt="TMM 2025" class="year-bg-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container article-section">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="article-header">
+            Tata Mumbai Marathon Recognized By World Athletics For<br />Sustainable
+            Best Practices
+          </h2>
+        </div>
+      </div>
+
+      <div class="row align-items-center mb-custom">
+        <div class="col-lg-5 col-md-6 mb-4 mb-md-0">
+          <div class="content-text">
+            <p>
+              After recently achieving the 'Athletics for a Better World'
+              Recognition by World Athletics, this recognition further reflects
+              the Tata Mumbai Marathon's ongoing commitment to creating a
+              positive environmental and social legacy, inspiring change beyond
+              the race itself.
+            </p>
+            <p>
+              A heartfelt thank you to all our partners, sponsors, volunteers,
+              and participants for their unwavering support in making TMM not
+              only a world-class running event but also a catalyst for community
+              well-being and environmental stewardship. Together, we continue to
+              champion the spirit of running for a better future.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6 offset-lg-1 col-md-6">
+          <img
+            src="news3.png"
+            alt="TMM Sustainability Initiative"
+            class="article-image"
+          />
+        </div>
+      </div>
+
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+          <img
+            src="news4.jpg"
+            alt="TMM Zero Waste Initiative"
+            class="article-image"
+          />
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="content-text">
+            <p>
+              The Tata Mumbai Marathon (TMM) has been honored by World Athletics
+              in its Athletics for a Better World Standard report, being
+              recognized for best practices in two key sustainability categories
+              – Zero Waste and Food Donation.
+            </p>
+            <p>
+              With strong stakeholder engagement and careful planning, the Tata
+              Mumbai Marathon diverted 96% of its waste from landfill. TMM
+              donated more than 10,000 pieces of fruit to the Roti Foundation,
+              which was distributed to underprivileged school children and
+              cancer patients across the city.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-scroll-container">
+      <div class="container">
+        <div class="news-wrapper">
+          <a href="#" class="news-item">
+            <img src="scrollbar1.jpg" class="news-thumb" alt="News 1" />
+            <div class="news-text">
+              Tata Mumbai Marathon Recognized By World Athletics For Sustainable
+              Best Practices
+            </div>
+          </a>
+
+          <a href="#" class="news-item">
+            <img src="scrollbar2.jpg" class="news-thumb" alt="News 1" />
+            <div class="news-text">
+              Tata Mumbai Marathon Recognized By World Athletics For Sustainable
+              Best Practices
+            </div>
+          </a>
+
+          <a href="#" class="news-item">
+            <img src="scrollbar3.jpg" class="news-thumb" alt="News 1" />
+            <div class="news-text">
+              Tata Mumbai Marathon Recognized By World Athletics For Sustainable
+              Best Practices
+            </div>
+          </a>
+
+          <a href="#" class="news-item">
+            <img src="scrollbar4.jpg" class="news-thumb" alt="News 1" />
+            <div class="news-text">
+              Tata Mumbai Marathon Recognized By World Athletics For Sustainable
+              Best Practices
+            </div>
+          </a>
+
+          <a href="#" class="news-item">
+            <img src="scrollbar5.jpg" class="news-thumb" alt="News 1" />
+            <div class="news-text">
+              Tata Mumbai Marathon Recognized By World Athletics For Sustainable
+              Best Practices
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- FOOTER XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+    <footer
+      class="bg-gray-900 text-white mt-12 px-5 pb-4"
+      style="background-color: #0e1622"
+    >
+      <div class="max-w-7xl mx-auto px-6 py-12 ps-5 pt-5">
+        <!-- GRID -->
+        <div class="row">
+          <!-- COL 1: Brand -->
+          <div class="col">
+            <h3 class="font-bold">Tata Mumbai Marathon</h3>
+
+            <p class="mt-4 text-gray-400 text-sm">
+              India's biggest sporting platform for social impact.<br />
+              #HarDilMumbai
+            </p>
+            <p class="mt-4 text-gray-500 text-xs">
+              14, St. James' Court, Marine Drive, Mumbai
+            </p>
+          </div>
+
+          <!-- COL 2: Quick Links -->
+          <div class="col">
+            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Policies</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Consent</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Waiver</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Virtual Waiver</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Medical Advisory</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Disclaimer</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Entry Rules & Regulations</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Legal Disclaimer</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Open Source License</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Disclosure</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- COL 3: Social -->
+          <div class="col m-2">
+            <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+            <div class="flex gap-6 text-2xl">
+              <a href="#" class="text-gray-400 hover:text-blue-600 transition">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white transition">
+                <i class="fab fa-x-twitter"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-pink-500 transition">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-blue-400 transition">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- COL 4: EXTRASPACE -->
+          <div class="col-3 ms-2"></div>
+        </div>
+
+        <!-- DIVIDER -->
+        <div class="mt-10 border-t border-gray-700 pt-6 text-center">
+          <p class="text-sm text-gray-500">
+            © <span id="current-year"></span> Tata Mumbai Marathon. All rights
+            reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Set current year dynamically for the copyright
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+
+      // Countdown
+      // FIX: Must define the countdown element using its ID.
+      const countdown = document.getElementById("countdown");
+
+      // Target race date (January is month 0)
+      const raceDate = new Date(2026, 0, 18, 5, 30, 0);
+
+      function updateCountdown() {
+        const diff = raceDate - Date.now();
+
+        if (!countdown) return; // Safety check
+
+        if (diff <= 0) {
+          countdown.innerText = "Race Day!";
+          return;
+        }
+
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+
+        countdown.innerText = `${d}d : ${h}h : ${m}m : ${s}s`;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

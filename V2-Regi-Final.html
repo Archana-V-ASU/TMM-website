@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marathon Registration - Step 1</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Inter Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              primary: "#2563eb",
+              accent: "#10b981",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .blur-nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        backdrop-filter: blur(14px) saturate(160%);
+        -webkit-backdrop-filter: blur(14px) saturate(160%);
+      }
+
+      .main-navbar {
+        height: 56px;
+      }
+
+      .sub-bar {
+        height: 34px;
+        font-size: 12.5px;
+      }
+
+      .nav-link {
+        color: #000;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 0 14px;
+        line-height: 56px;
+        cursor: pointer;
+      }
+
+      .nav-link:hover {
+        color: #3195ff;
+      }
+
+      .signin {
+        height: 56px;
+        min-width: 120px;
+        background: #006cb4;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+      }
+
+      /* DROPDOWN */
+      .nav-group {
+        position: relative;
+      }
+
+      .nav-dropdown {
+        position: absolute;
+        top: 56px;
+        left: 0;
+        min-width: 240px;
+        background: #fff;
+        border: 1px solid #eee;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(8px);
+        transition: all 0.2s ease;
+        z-index: 2000;
+      }
+
+      .nav-group:hover .nav-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .nav-dropdown a {
+        display: block;
+        padding: 10px 14px;
+        font-size: 14px;
+        color: #333;
+        white-space: nowrap;
+      }
+
+      .nav-dropdown a:hover {
+        background: #f3f4f6;
+        color: #3195ff;
+      }
+
+      .step-active {
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.4);
+      }
+
+      .step-complete {
+        background-color: #10b981;
+        border-color: #10b981;
+      }
+
+      .marathon-background {
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)
+          ),
+          url("https://tmmcms.tinglabs.in/uploads/additional_Pages_Mobile_3c0a5e4b_725a25f8f5.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+    </style>
+  </head>
+
+  <body class="marathon-background">
+    <div class="blur-nav">
+      <!-- MAIN NAV -->
+      <div
+        class="d-flex align-items-center justify-content-between bg-white/60 shadow main-navbar"
+      >
+        <!-- LOGO -->
+        <img src="TMM-logo.jpg" alt="TMM" style="height: 56px" />
+
+        <!-- NAV LINKS -->
+        <nav class="d-none d-lg-flex align-items-center">
+          <a class="nav-link" href="V2-Home.html">Home</a>
+          <a class="nav-link" href="V2-Home.html">About Us</a>
+
+          <!-- RACE CATEGORIES -->
+          <div class="nav-group">
+            <span class="nav-link">Race Categories</span>
+            <div class="nav-dropdown">
+              <a href="V2-Cat-Marathon.html">Marathon (42.2k)</a>
+              <a href="#">Half Marathon (21.1k)</a>
+              <a href="#">Open 10K</a>
+              <a href="#">Dream Run</a>
+              <a href="#">Senior Citizens’ Run</a>
+              <a href="#">Champions with Disabilities</a>
+              <a href="#">Virtual Run</a>
+            </div>
+          </div>
+
+          <!-- PHILANTHROPY -->
+          <div class="nav-group">
+            <span class="nav-link">Philanthropy</span>
+            <div class="nav-dropdown">
+              <a href="#">Introduction</a>
+              <a href="#">Charity Programme</a>
+              <a href="#">Charity Running Places</a>
+              <a href="#">Participating NGOs</a>
+            </div>
+          </div>
+
+          <!-- NEWS -->
+          <div class="nav-group">
+            <span class="nav-link">News & Media</span>
+            <div class="nav-dropdown">
+              <a href="Gallery.html">Gallery</a>
+              <a href="News.html">Latest News</a>
+              <a href="#">Media Contact</a>
+            </div>
+          </div>
+
+          <!-- INITIATIVES -->
+          <div class="nav-group">
+            <span class="nav-link">Initiatives</span>
+            <div class="nav-dropdown">
+              <a href="#">TMM Legends Club</a>
+              <a href="#">Har Dil Mumbai</a>
+              <a href="#">Green Initiatives</a>
+              <a href="#">Inspiration Medal</a>
+            </div>
+          </div>
+
+          <!-- RESULTS -->
+          <div class="nav-group">
+            <span class="nav-link">Results</span>
+            <div class="nav-dropdown">
+              <a href="#">Race Results</a>
+              <a href="#">Category Winners</a>
+              <a href="#">Leaderboard</a>
+            </div>
+          </div>
+        </nav>
+
+        <!-- SIGN IN -->
+        <a href="V2-Sign-in.html" class="signin">Sign in</a>
+      </div>
+
+      <!-- SUB BAR -->
+      <div
+        class="d-flex align-items-center justify-content-between bg-white/40 shadow sub-bar"
+      >
+        <div id="countdown" class="ps-3">--d : --h : --m : --s</div>
+        <img
+          src="idfc logo.png"
+          alt="Sponsor"
+          style="height: 34px; padding-right: 0; margin-right: 0"
+        />
+      </div>
+    </div>
+    <!-- MAIN CONTENT -->
+    <div class="w-full max-w-4xl mx-auto px-4 py-14 pt-5">
+      <header class="text-center mb-10 mt-5 text-white">
+        <h1 class="text-4xl font-extrabold mb-2 pt-5">
+          2026 TMM | Marathon Registration
+        </h1>
+        <p class="text-lg text-gray-200">
+          Secure your spot in the race! This is the first step of three.
+        </p>
+      </header>
+
+      <!-- STEPS -->
+      <div class="flex justify-center mb-12">
+        <div class="flex items-center space-x-6">
+          <div class="flex flex-col items-center">
+            <div
+              id="step1"
+              class="w-10 h-10 flex items-center justify-center bg-primary text-white font-bold step-active"
+            >
+              1
+            </div>
+            <span class="text-sm font-medium text-primary mt-2"
+              >Personal Details</span
+            >
+          </div>
+
+          <div class="w-24 h-0.5 bg-gray-400"></div>
+
+          <div class="flex flex-col items-center">
+            <div
+              id="step2"
+              class="w-10 h-10 flex items-center justify-center border-2 border-gray-400 text-gray-300 font-bold"
+            >
+              2
+            </div>
+            <span class="text-sm text-gray-300 mt-2"
+              >Race Selection & Fees</span
+            >
+          </div>
+
+          <div class="w-24 h-0.5 bg-gray-400"></div>
+
+          <div class="flex flex-col items-center">
+            <div
+              id="step3"
+              class="w-10 h-10 flex items-center justify-center border-2 border-gray-400 text-gray-300 font-bold"
+            >
+              3
+            </div>
+            <span class="text-sm text-gray-300 mt-2">Waiver & Confirm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="bg-white shadow-2xl p-8 border-t-4 border-primary">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-3">
+          Runner Information (Step 1 of 3)
+        </h2>
+
+        <form id="registration-form" onsubmit="handleFormSubmit(event)">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div>
+              <label class="block text-sm font-medium mb-1">First Name</label>
+              <input required class="w-full p-3 border border-gray-300" />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-1">Last Name</label>
+              <input required class="w-full p-3 border border-gray-300" />
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium mb-1">Email</label>
+              <input
+                type="email"
+                required
+                class="w-full p-3 border border-gray-300"
+              />
+            </div>
+          </div>
+
+          <div class="flex justify-end pt-6 border-t">
+            <button
+              class="px-6 py-3 bg-primary text-white font-semibold shadow-lg hover:bg-blue-700 transition"
+            >
+              Next Step →
+            </button>
+          </div>
+
+          <div
+            id="message-box"
+            class="mt-4 p-4 text-sm text-white hidden"
+          ></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white mt-12">
+      <div class="max-w-7xl mx-auto px-6 py-12">
+        <!-- GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <!-- COL 1: Brand -->
+          <div>
+            <a href="#" class="text-2xl font-bold"> Tata Mumbai Marathon </a>
+            <p class="mt-4 text-gray-400 text-sm">
+              India's biggest sporting platform for social impact.<br />
+              #HarDilMumbai
+            </p>
+            <p class="mt-4 text-gray-500 text-xs">
+              14, St. James' Court, Marine Drive, Mumbai
+            </p>
+          </div>
+
+          <!-- COL 2: Quick Links -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Policies</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Consent</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Waiver</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Virtual Waiver</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Medical Advisory</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Disclaimer</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Entry Rules & Regulations</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Legal Disclaimer</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Open Source License</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Disclosure</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- COL 3: Social -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+            <div class="flex gap-6 text-2xl">
+              <a href="#" class="text-gray-400 hover:text-blue-600 transition">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-white transition">
+                <i class="fab fa-x-twitter"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-pink-500 transition">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-blue-400 transition">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIVIDER -->
+        <div class="mt-10 border-t border-gray-700 pt-6 text-center">
+          <p class="text-sm text-gray-500">
+            © <span id="current-year"></span> Tata Mumbai Marathon. All rights
+            reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const raceDate = new Date(2026, 0, 18, 5, 30, 0);
+
+      function updateCountdown() {
+        const now = Date.now();
+        const diff = raceDate - now;
+        if (diff <= 0) {
+          document.getElementById("countdown").innerText = "Race Day!";
+          return;
+        }
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById(
+          "countdown"
+        ).innerText = `${d}d : ${h}h : ${m}m : ${s}s`;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      function handleFormSubmit(e) {
+        e.preventDefault();
+        const box = document.getElementById("message-box");
+        box.textContent = "Details saved. Proceeding to Step 2…";
+        box.className = "mt-4 p-4 text-sm text-white bg-green-500";
+      }
+
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
+    </script>
+  </body>
+</html>
